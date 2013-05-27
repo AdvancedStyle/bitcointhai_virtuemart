@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<install version="1.5" type="component" group="" method="upgrade" >
+    <name>bitcointhai</name>
+    <creationDate>Feb 2012</creationDate>
+    <author>David B</author>
+    <authorUrl>http://www.advancedstyle.com</authorUrl>
+    <copyright>Copyright (C) 2013 Bitcoin.in.th</copyright>
+    <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+    <version>1.0</version>
+    <description><![CDATA[<a href="http://bitcoin.in.th" target="_blank">Bitcoin.in.th</a> payment plugin for Virtuemart 2]]>
+    </description>
+
+    <scriptfile>script.install.php</scriptfile>
+	<!-- Custom installer for 1.5 -->
+    <installfile>script.install.php</installfile>
+	<!-- Custom uninstaller for 1.5 -->
+    <uninstallfile>script.install.php</uninstallfile>
+
+    <administration>
+        <menu></menu>
+        <files>
+            <folder>files</folder>
+        </files>
+        <languages folder="files/administrator/language">
+            <language tag="en-GB">en-GB.plg_vmpayment_bitcointhai.ini</language>
+        </languages>
+    </administration>
+	
+
+</install>
