@@ -32,9 +32,6 @@
         <param name="countries" type="vmcountries"  scope="com_virtuemart" default="" label="VMPAYMENT_BITCOINTHAI_COUNTRIES" description="VMPAYMENT_BITCOINTHAI_COUNTRIES_DESC"/>
         <param name="min_amount" type="text"  label="VMPAYMENT_BITCOINTHAI_MIN_AMOUNT" description="VMPAYMENT_BITCOINTHAI_MIN_AMOUNT_EXPLAIN" />
         <param name="max_amount" type="text"  label="VMPAYMENT_BITCOINTHAI_MAX_AMOUNT" description="VMPAYMENT_BITCOINTHAI_MAX_AMOUNT_EXPLAIN" />
-        <param name="cost_per_transaction" type="text"  label="VMPAYMENT_BITCOINTHAI_COST_PER_TRANSACTION" description="VMPAYMENT_BITCOINTHAI_COST_PER_TRANSACTION_EXPLAIN" />
-        <param name="cost_percent_total" type="text"  label="VMPAYMENT_BITCOINTHAI_COST_PERCENT_TOTAL" description="VMPAYMENT_BITCOINTHAI_COST_PERCENT_TOTAL_EXPLAIN" />
-        <param name="tax_id" type="vmtaxes" scope="com_virtuemart"  label="VMPAYMENT_BITCOINTHAI_TAX" description="VMPAYMENT_BITCOINTHAI_TAX_EXPLAIN" />
     </params>
 
 </install>

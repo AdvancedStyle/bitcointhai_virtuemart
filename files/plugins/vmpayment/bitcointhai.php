@@ -28,6 +28,7 @@ class plgVMPaymentBitcointhai extends vmPSPlugin {
     public static $_this = false;
     private $_bitcointhai;
     private $_version = "1.0.2";
+	var $method;
 
     function __construct(& $subject, $config) {
 	//if (self::$_this)
@@ -47,15 +48,11 @@ class plgVMPaymentBitcointhai extends vmPSPlugin {
 	    'payment_currency'          => array(0, 'int'),
 	    'countries'                 => array(0, 'char'),
 	    'min_amount'                => array(0, 'int'),
-	    'max_amount'                => array(0, 'int'),
-	    'cost_per_transaction'      => array(0, 'int'),
-	    'cost_percent_total'        => array(0, 'int'),
-	    'tax_id'                    => array(0, 'int')
+	    'max_amount'                => array(0, 'int')
 	);
 
 	$this->setConfigParameterable($this->_configTableFieldName, $varsToPush);
 
-	//self::$_this = $this;
     }
 
     private function _getVersion(){
@@ -67,7 +64,6 @@ class plgVMPaymentBitcointhai extends vmPSPlugin {
     }
 
     private function bitcointhai(){
-        //if (!isset($this->_bitcointhai)) $this->_bitcointhai = new Icepay_Project_Helper();
         return $this->_bitcointhai;
     }
 
@@ -225,17 +221,14 @@ class plgVMPaymentBitcointhai extends vmPSPlugin {
 
 
     function getCosts(VirtueMartCart $cart, $method, $cart_prices) {
-		if (preg_match('/%$/', $method->cost_percent_total)) {
-			$cost_percent_total = substr($method->cost_percent_total, 0, -1);
-		} else {
-			$cost_percent_total = $method->cost_percent_total;
-		}
-		return ($method->cost_per_transaction + ($cart_prices['salesPrice'] * $cost_percent_total * 0.01));
+		return 0;
     }
 	
     protected function checkConditions($cart, $method, $cart_prices) {
 
 		$address = (($cart->ST == 0) ? $cart->BT : $cart->ST);
+		
+		$this->method = $method;
 	
 		$amount = $cart_prices['salesPrice'];
 		$amount_cond = ($amount >= $method->min_amount AND $amount <= $method->max_amount
@@ -314,7 +307,7 @@ class plgVMPaymentBitcointhai extends vmPSPlugin {
 		if (!class_exists( 'VmConfig' )) require(JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_virtuemart'.DS.'helpers'.DS.'config.php');
 		if(!class_exists('VirtueMartCart')) require(JPATH_VM_SITE.DS.'helpers'.DS.'cart.php');
 		
-		if($_REQUEST['task'] != ''){
+		if($_REQUEST['task'] != '' && $_POST['task'] != 'setpayment'){
 			return $pluginName;
 		}
 		
@@ -344,7 +337,6 @@ class plgVMPaymentBitcointhai extends vmPSPlugin {
 	private function getOrderTotal(){
 		$cart = VirtueMartCart::getCart();
 		$c = $cart->getCartPrices();
-		
 		$currency = CurrencyDisplay::getInstance();
 		
 		return round($c['salesPriceShipment'] + $c['salesPricePayment'] + $c['withTax'] - $c['salesPriceCoupon'],$currency->getNbrDecimals());
